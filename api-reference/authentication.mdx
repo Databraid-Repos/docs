@@ -1,0 +1,31 @@
+To interact with Databraid's API, you need to authenticate using API keys. There are two types of API keys: **staging** and **production**.
+
+## Staging Environment
+
+1. **Obtain a Staging API Key**: 
+   - You will need a staging API key to test and interact with Databraid's API in a non-production environment.
+   - This key is sufficient for development and testing purposes.
+
+## Production Environment
+
+1. **Obtain a Production API Key**:
+   - For production use, you must acquire a production API key.
+   - This key is necessary for accessing Databraid's API in a live environment.
+
+2. **Add Broker Credentials to AWS Secrets Manager**:
+   - In addition to the production API key, you need to add broker credentials to an AWS Secrets Manager.
+   - Databraid will have programmatic read-only access to these credentials, ensuring secure and efficient authentication.
+
+### Steps to Authenticate
+
+1. **Request API Key**:
+   - Contact your Databraid administrator or support to request the necessary API key for your environment.
+
+2. **Configure AWS Secrets Manager** (for production):
+   - Follow AWS documentation to securely store your broker credentials in AWS Secrets Manager.
+   - Ensure that Databraid has the necessary permissions to access these secrets.
+
+3. **Use the API Key**:
+   - Include the API key in your API requests to authenticate and interact with Databraid's services.
+
+By following these steps, you can securely authenticate and interact with Databraid's API in both staging and production environments.
