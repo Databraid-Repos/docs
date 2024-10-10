@@ -1,0 +1,22 @@
+To interact with Databraid's API, you will need to use your staging API key. This key is essential for authenticating your requests and should be included in the authorization header of each request.
+
+## Making your first request
+
+### Step 1: Authorization
+- Navigate to the "Get Carriers" endpoint in Databraid's documentation.
+- In the Authorization header, enter your staging API key. This key is required to authenticate your request.
+
+### Step 2: Specify Fields
+- Fill in any other required fields as specified in the API documentation.
+- You may also include optional fields if they are relevant to your request.
+
+### Step 3: Send the Request
+- Once all necessary fields are filled, click the "Send" button to execute the request.
+
+## Response
+The "Get Carriers" endpoint will return a list of all carrier connections supported for your brokerage. You can use the IDs of the carriers returned for subsequent HTTP POST requests, such as:
+- Add Vehicle
+- Add Driver
+- Swap Vehicle
+
+Ensure that you handle the response appropriately, checking for any errors or required data for further operations.
