@@ -1,29 +1,53 @@
-To interact with Databraid's API, you will need to use your staging API key. This key is essential for authenticating your requests and should be included in the authorization header of each request.
+# Making Requests
 
-## Making your first request
+To interact with DataBraid's API, you'll need to use your staging API key. This key is crucial for request authentication and must be included in the authorization header of every request.
 
-### Step 1: Authorization
-- Navigate to the "Get Carriers" endpoint in Databraid's documentation.
-- In the Authorization header, enter your staging API key. This key is required to authenticate your request.
+## Your First Request
 
-### Step 2: Specify Fields
-- Fill in any other required fields as specified in the API documentation.
-- You may also include optional fields if they are relevant to your request.
+Follow these steps to make your first API call:
 
-### Step 3: Send the Request
-- Once all necessary fields are filled, click the "Send" button to execute the request.
+### Authorization
 
-## Response
-The "Get Carriers" endpoint will return a list of all carrier connections supported for your brokerage. You can use the IDs of the carriers returned for subsequent HTTP POST requests, such as:
+Navigate to the "Get Carriers" endpoint in the DataBraid documentation.
+In the Authorization header, enter your staging API key
+text
+Authorization: Bearer YOUR_STAGING_API_KEY
+2. Specify Parameters
+1. Fill in all required fields as specified in the API documentation.
+2. Include optional fields if relevant to your request.
+3. Send the Request
+Click the "Send" button to execute the request.
+
+## Understanding the Response
+
+The "Get Carriers" endpoint returns a list of carrier connections supported for your brokerage. The response will include carrier IDs, which you can use in subsequent requests.
+
+### Example Response:json
+{
+  "carriers": [
+    {
+      "id": "carr_123456",
+      "name": "ABC Insurance",
+      "supported_operations": ["add_vehicle", "add_driver", "swap_vehicle"]
+    },
+    {
+      "id": "carr_789012",
+      "name": "XYZ Assurance",
+      "supported_operations": ["add_vehicle", "add_driver"]
+    }
+  ]
+}
+Use the carrier IDs for other operations such as:
+
 - Add Vehicle
 - Add Driver
 - Swap Vehicle
 
-Ensure that you handle the response appropriately, checking for any errors or required data for further operations.
+Always handle the response appropriately, checking for errors and extracting required data for further operations.
 
-## Testing the APIs
+## Testing the API
 
-You can test the APIs directly within the Databraid documentation and see the responses in real-time. We support requests from various programming languages, including:
+You can test the APIs directly within the DataBraid documentation interface. We support requests in various programming languages:
 
 - cURL
 - Python
@@ -32,4 +56,17 @@ You can test the APIs directly within the Databraid documentation and see the re
 - Go
 - Java
 
-This allows you to quickly experiment with the API and understand how it works before integrating it into your application.
+This allows you to experiment with the API and understand its functionality before integrating it into your application.
+
+### Example: Python Request
+python
+import requests
+
+url = "https://api.databraid.com/v1/carriers"
+headers = {
+    "Authorization": "Bearer YOUR_STAGING_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+print(response.json())
+Remember to replace YOUR_STAGING_API_KEY with your actual staging API key when making requests.

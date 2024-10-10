@@ -1,31 +1,36 @@
-To interact with Databraid's API, you need to authenticate using API keys. There are two types of API keys: **staging** and **production**.
+## API Key Authentication
 
-## Staging Environment
+DataBraid's API uses API keys for secure authentication. Here's how to implement it:
 
-1. **Obtain a Staging API Key**: 
-   - You will need a staging API key to test and interact with Databraid's API in a non-production environment.
-   - This key is sufficient for development and testing purposes.
+## API Key Usage
 
-## Production Environment
+The most secure and recommended method is to include the API key in the request headers. Specifically, you should use the "Authorization" header with "X-API-Key".
 
-1. **Obtain a Production API Key**:
-   - For production use, you must acquire a production API key.
-   - This key is necessary for accessing Databraid's API in a live environment.
+### Header Format
 
-2. **Add Broker Credentials to AWS Secrets Manager**:
-   - In addition to the production API key, you need to add broker credentials to an AWS Secrets Manager.
-   - Databraid will have programmatic read-only access to these credentials, ensuring secure and efficient authentication.
+Authorization: X-API-Key YOUR_API_KEY
+Replace "YOUR_API_KEY" with the actual API key provided by DataBraid
 
-### Steps to Authenticate
+## Implementation Example
 
-1. **Request API Key**:
-   - Contact your Databraid administrator or support to request the necessary API key for your environment.
+When making requests to DataBraid's API, ensure you include the API key in your request headers. Here's a simple example using JavaScript's fetch API:
 
-2. **Configure AWS Secrets Manager** (for production):
-   - Follow AWS documentation to securely store your broker credentials in AWS Secrets Manager.
-   - Ensure that Databraid has the necessary permissions to access these secrets.
+```javascript
+fetch('https://api.production.databraid.io', {
+  headers: {
+    'X-API-Key': 'YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  }
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
 
-3. **Use the API Key**:
-   - Include the API key in your API requests to authenticate and interact with Databraid's services.
+## Security Considerations
 
-By following these steps, you can securely authenticate and interact with Databraid's API in both staging and production environments.
+- We support HTTPS requests only, ensuring that your requests are securely encrypted during transit. HTTP requests are not supported to maintain the highest level of security.
+- Keep your API key confidential and never share it publicly or include it in client-side code.
+- If possible, make API requests on the server side to avoid exposing your API key in the browser.
+
+By following these guidelines, you can securely authenticate and interact with DataBraid's API using API keys.
