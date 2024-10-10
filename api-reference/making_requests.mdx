@@ -1,53 +1,8 @@
-# Making Requests
-
 To interact with DataBraid's API, you'll need to use your staging API key. This key is crucial for request authentication and must be included in the authorization header of every request.
 
 ## Your First Request
 
-Follow these steps to make your first API call:
-
-### Authorization
-
-Navigate to the "Get Carriers" endpoint in the DataBraid documentation.
-In the Authorization header, enter your staging API key
-text
-Authorization: Bearer YOUR_STAGING_API_KEY
-2. Specify Parameters
-1. Fill in all required fields as specified in the API documentation.
-2. Include optional fields if relevant to your request.
-3. Send the Request
-Click the "Send" button to execute the request.
-
-## Understanding the Response
-
-The "Get Carriers" endpoint returns a list of carrier connections supported for your brokerage. The response will include carrier IDs, which you can use in subsequent requests.
-
-### Example Response:json
-{
-  "carriers": [
-    {
-      "id": "carr_123456",
-      "name": "ABC Insurance",
-      "supported_operations": ["add_vehicle", "add_driver", "swap_vehicle"]
-    },
-    {
-      "id": "carr_789012",
-      "name": "XYZ Assurance",
-      "supported_operations": ["add_vehicle", "add_driver"]
-    }
-  ]
-}
-Use the carrier IDs for other operations such as:
-
-- Add Vehicle
-- Add Driver
-- Swap Vehicle
-
-Always handle the response appropriately, checking for errors and extracting required data for further operations.
-
-## Testing the API
-
-You can test the APIs directly within the DataBraid documentation interface. We support requests in various programming languages:
+You can make requests directly from DataBraid's documentation. We support requests in various programming languages:
 
 - cURL
 - Python
@@ -58,15 +13,50 @@ You can test the APIs directly within the DataBraid documentation interface. We 
 
 This allows you to experiment with the API and understand its functionality before integrating it into your application.
 
-### Example: Python Request
-python
-import requests
+Follow these steps to make your first API call:
 
-url = "https://api.databraid.com/v1/carriers"
-headers = {
-    "Authorization": "Bearer YOUR_STAGING_API_KEY"
+1. Authorization
+   - Navigate to the "Get Carriers" endpoint in the DataBraid documentation.
+   - In the Authorization header, enter your staging API key:
+```
+X-API-Key: YOUR_API_KEY
+```
+2. Specify Parameters
+- Fill in all required fields as specified in the API documentation.
+- Include optional fields if relevant to your request.
+
+3. Send the Request
+- Click the "Send" button to make the request.
+
+## Understanding the Response
+
+The "Get Carriers" endpoint returns a list of carrier connections supported for your brokerage. The response will include carrier IDs, which you can use in subsequent requests.
+
+### Example Response:
+
+```json
+{
+    "first": 123,
+    "offset": 123,
+    "has_next_page": true,
+    "has_previous_page": true,
+    "total_count": 123,
+    "results": [
+        {
+            "id": 82343,
+            "name": "ABC Insurance Carrier"
+        },
+        {
+            "id": 12893,
+            "name": "XYZ Insurance Carrier"
+        }
+    ]
 }
+```
+Use the carrier IDs for other operations such as:
 
-response = requests.get(url, headers=headers)
-print(response.json())
-Remember to replace YOUR_STAGING_API_KEY with your actual staging API key when making requests.
+- Add Vehicle
+- Add Driver
+- Swap Vehicle
+
+Always handle the response appropriately, checking for errors and extracting required data for further operations.
